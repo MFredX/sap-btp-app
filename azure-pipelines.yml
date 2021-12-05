@@ -24,7 +24,11 @@ steps:
   displayName: 'Install Cloud MTA Build Tool (MBT)'
 
 - script: |
-    mbt build -p=cf -s=$(Agent.BuildDirectory)\s
+    ls
+  displayName: 'List folder directory content'
+
+- script: |
+    mbt build -p=cf
   displayName: 'Build the MTA'
 
 
