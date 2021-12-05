@@ -18,10 +18,10 @@ steps:
 - script: |
     npm install
     npm install -g mbt @ui5/cli
-    mbt build -p=cf -s=$(Agent.BuildDirectory)\s
-- task: PublishPipelineArtifact@1
+
+- task: CmdLine@2
   inputs:
-    targetPath: '$(Pipeline.Workspace)\\s\mta_archives\first_app.mtar'
-    artifact: 'FirstApp'
-    publishLocation: 'pipeline'
-  displayName: 'npm install and build'
+    script: |
+      echo Write your commands here
+      echo Hello world
+
