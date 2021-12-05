@@ -17,14 +17,14 @@ steps:
 
 - script: |
     npm install
-    displayName: 'Install dependencies'
+  displayName: 'Install dependencies'
 
 - script: |
     npm install -g mbt @ui5/cli
-    displayName: 'Install Cloud MTA Build Tool (MBT)'
+  displayName: 'Install Cloud MTA Build Tool (MBT)'
 
 - script: |
-    MBT BUILD -p=cf -s=$(Agent.BuildDirectory)\s
-    displayName: 'Build the MTA'
+    mbt build -p=cf -s=$(Agent.BuildDirectory)\s
+  displayName: 'Build the MTA'
 
 
