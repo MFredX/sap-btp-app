@@ -32,6 +32,7 @@ steps:
   displayName: 'Build the MTA'
 
 - script: |
+    cd mta_archives
     ls
   displayName: 'List folder directory content post-build'
 
