@@ -25,10 +25,14 @@ steps:
 
 - script: |
     ls
-  displayName: 'List folder directory content'
+  displayName: 'List folder directory content pre-build'
 
 - script: |
     mbt build -p=cf
   displayName: 'Build the MTA'
+
+- script: |
+    ls
+  displayName: 'List folder directory content post-build'
 
 
