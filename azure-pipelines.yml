@@ -30,10 +30,13 @@ steps:
 - script: |
     mbt build -p=cf
   displayName: 'Build the MTA'
-
 - script: |
-    cd mta_archives
+    cd mta_archives'
     ls
   displayName: 'List folder directory content post-build'
 
-
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/mta_archives/sap-btp-sapui5_0.0.1.mtar'
+    artifact: 'SAP-BTP-SAPUI5'
+    publishLocation: 'pipeline'
