@@ -34,6 +34,7 @@ steps:
     cd mta_archives
     ls
     pwd
+    cd ../
   displayName: 'List folder directory content post-build'
 
 - task: PublishPipelineArtifact@1
