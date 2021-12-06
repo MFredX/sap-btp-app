@@ -33,6 +33,7 @@ steps:
 - script: |
     cd mta_archives
     ls
+    pwd
   displayName: 'List folder directory content post-build'
 
 - task: PublishPipelineArtifact@1
