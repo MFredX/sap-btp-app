@@ -35,6 +35,8 @@ steps:
     ls
     pwd
     cd ../
+    pwd
+    echo $(Pipeline.Workspace)
   displayName: 'List folder directory content post-build'
 
 - task: PublishPipelineArtifact@1
