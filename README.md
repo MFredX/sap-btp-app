@@ -55,16 +55,15 @@ The `azure-pipelines.yml` outlines the steps of the build process.
 | **Generation Platform**<br>SAP Business Application Studio                                     |
 | **Floorplan Used**<br>simple                                                                   |
 | **Service Type**<br>None                                                                       |
-
-|**Service URL**<br>N/A
-|**Module Name**<br>sapui5|
-|**Application Title**<br>Tutorial|
-|**Namespace**<br>sap.btp|
-|**UI5 Theme**<br>sap_fiori_3|
-|**UI5 Version**<br>Latest|
-|**Enable Code Assist Libraries**<br>False|
-|**Add Eslint configuration**<br>False|
-|**Enable Telemetry**<br>True|
+| **Service URL**<br>N/A                                                                         |
+| **Module Name**<br>sapui5                                                                      |
+| **Application Title**<br>Tutorial                                                              |
+| **Namespace**<br>sap.btp                                                                       |
+| **UI5 Theme**<br>sap_fiori_3                                                                   |
+| **UI5 Version**<br>Latest                                                                      |
+| **Enable Code Assist Libraries**<br>False                                                      |
+| **Add Eslint configuration**<br>False                                                          |
+| **Enable Telemetry**<br>True                                                                   |
 
 ## sapui5
 
