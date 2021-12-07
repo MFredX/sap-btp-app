@@ -16,9 +16,9 @@ The `azure-pipelines.yml` outlines the steps of the build process.
 
 #### Configuration
 
-**Agent pool** - Azure Pipelines
+- **Agent pool** - Azure Pipelines
 
-**Agent Specification** - vs2017-win2016
+- **Agent Specification** - vs2017-win2016
 
 #### Release Tasks
 
