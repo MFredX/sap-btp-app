@@ -1,6 +1,6 @@
 ## CI/CD Pipeline for a UI5 Application in SAP BTP Cloud Foundry Environment
 
-This repository demonstrates a simple CI/CD pipeline for a UI5 app that is deployed in SAP BTP Cloud Foundry Environment. The repo hopes to give a rough idea how such a pipeline would work.
+This repository demonstrates a simple CI/CD pipeline for a UI5 app that is deployed in SAP BTP Cloud Foundry Environment. The repo hopes to give a rough idea how such a pipeline would work and can be considered a good starting point for CI/CD designs.
 
 ## Implementation notes
 
@@ -38,6 +38,12 @@ The `azure-pipelines.yml` outlines the steps of the build process.
    `cd _sap-ui5-first/SAP-BTP-SAPUI5`
 
    `cf deploy sap-btp-sapui5_0.0.1.mtar`
+
+## Other Helpful Resources
+
+[Build a CI/CD Pipeline in Azure DevOps and connect it to SAP Cloud Foundry](https://blogs.sap.com/2021/01/25/build-a-ci-cd-pipeline-in-azure-devops-and-connect-it-to-sap-cloud-foundry/)
+
+[DevOps: CAP CI/CD using Azure DevOps – Part 1](https://blogs.sap.com/2020/06/08/devops-cap-ci-cd-using-azure-devops-part-1/)
 
 ## Application Details (Created by SAP Fiori tools upon creation)
 
