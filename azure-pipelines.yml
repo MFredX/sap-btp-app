@@ -9,9 +9,6 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-- template: mta.yaml
-
 steps:
 - task: NodeTool@0
   inputs:
@@ -33,6 +30,10 @@ steps:
 - script: |
     mbt build -p=cf
   displayName: 'Build the MTA'
+- script : |
+    pip install shyaml
+    cat mta.yaml | shyaml get-value version
+    
 - script: |
     echo SAP App Version: $(version)
     cd mta_archives
