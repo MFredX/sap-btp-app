@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-- template: variables.yaml
+- template: mta.yaml
 
 steps:
 - task: NodeTool@0
