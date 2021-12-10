@@ -33,7 +33,6 @@ steps:
 
 - script : |
     pip install shyaml
-    cat mta.yaml
     cat mta.yaml | shyaml get-value version
   displayName: 'Get verison from yaml using shell'
 
