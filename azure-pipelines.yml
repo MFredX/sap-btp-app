@@ -38,6 +38,7 @@ steps:
     pwd
     echo Pipeline.Workspace is : $(Pipeline.Workspace)
     echo Artificat Staging dir : $(Build.ArtifactStagingDirectory)
+    echo Build Repo LocalPath :$(Build.Repository.LocalPath)
   displayName: 'List folder directory content post-build'
 
 - task: PublishPipelineArtifact@1
