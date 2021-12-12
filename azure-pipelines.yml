@@ -34,6 +34,8 @@ steps:
 - script : |
     pip install shyaml
     cat mta.yaml | shyaml get-value version
+    echo "##vso[task.setvariable variable=version]cat mta.yaml | shyaml get-value version"
+    echo "The app version is : $SAUCE"
   displayName: 'Get verison from yaml using shell'
 
 
