@@ -23,10 +23,6 @@ steps:
     npm install -g mbt @ui5/cli
   displayName: 'Install Cloud MTA Build Tool (MBT)'
 
-- task: Bash@3
-  inputs:
-    filePath: '$(System.DefaultWorkingDirectory)/actions.sh'
-    
 - bash : |
     pip install shyaml
     cat mta.yaml | shyaml get-value description
@@ -34,6 +30,12 @@ steps:
     echo "##vso[task.setvariable variable=version]cat mta.yaml | shyaml get-value version"
     echo "The app version is : $version"
   displayName: 'Get verison from yaml using shell'
+
+
+- task: Bash@3
+  inputs:
+    filePath: '$(System.DefaultWorkingDirectory)/actions.sh'
+
 
 - script: |
     ls
