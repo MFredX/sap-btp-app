@@ -36,7 +36,6 @@ steps:
   inputs:
     filePath: '$(System.DefaultWorkingDirectory)/actions.sh'
 
-
 - script: |
     ls
   displayName: 'List folder directory content pre-build'
