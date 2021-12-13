@@ -23,6 +23,10 @@ steps:
     npm install -g mbt @ui5/cli
   displayName: 'Install Cloud MTA Build Tool (MBT)'
 
+- task: Bash@3
+  inputs:
+    filePath: '$(System.DefaultWorkingDirectory)/actions.sh'
+    
 - bash : |
     pip install shyaml
     cat mta.yaml | shyaml get-value description
