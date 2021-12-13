@@ -30,7 +30,7 @@ steps:
     echo "##vso[task.setvariable variable=version]cat mta.yaml | shyaml get-value version"
     echo "The app version is : $version"
     echo "##vso[task.setvariable variable=version;]foo"
-    echo "You can use macro syntax for variables: $(myVar)"
+    echo "You can use macro syntax for variables: $(version)"
   displayName: 'Get verison from yaml using shell'
 
 
