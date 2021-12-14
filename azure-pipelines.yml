@@ -63,6 +63,6 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.Repository.LocalPath)/mta_archives/sap-btp-sapui5_${{version}}.mtar'
+    targetPath: '$(Build.Repository.LocalPath)/mta_archives/sap-btp-sapui5_"$(version)".mtar'
     artifact: 'SAP-BTP-SAPUI5'
     publishLocation: 'pipeline'
