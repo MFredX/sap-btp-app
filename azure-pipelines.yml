@@ -30,9 +30,13 @@ steps:
     echo "##vso[task.setvariable variable=version;]cat mta.yaml | shyaml get-value version"
     echo "The app version is : $version"
     echo "##vso[task.setvariable variable=myVar;]foo"
-    echo "You can use macro syntax for variables: $(myVar)"
+    
   displayName: 'Get verison from yaml using shell'
 
+- bash : |
+    pip install shyaml
+    echo "You can use macro syntax for variables: $(myVar)"
+    echo "Version is: $(version)"
 
 - task: Bash@3
   inputs:
