@@ -25,17 +25,9 @@ steps:
 
 - bash : |
     pip install shyaml
-    cat mta.yaml | shyaml get-value description
-    cat mta.yaml | shyaml get-value ID
     echo "##vso[task.setvariable variable=version;]$(cat mta.yaml | shyaml get-value version)"
-    echo "##vso[task.setvariable variable=appName;]$(cat mta.yaml | shyaml get-value ID)"
-    
-  displayName: 'Get verison from yaml using shell'
-
-- bash : |
-    pip install shyaml
-    echo "You can use macro syntax for variables: $(appName)"
-    echo "Version is: $(version)"
+    echo "##vso[task.setvariable variable=appID;]$(cat mta.yaml | shyaml get-value ID)"
+  displayName: 'Defining verison and appID variables'
 
 - task: Bash@3
   inputs:
@@ -63,6 +55,6 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.Repository.LocalPath)/mta_archives/sap-btp-sapui5_$(version).mtar'
+    targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appID)_$(version).mtar' #Default location & name of MTA Archive from Cloud MTA Build 
     artifact: 'SAP-BTP-SAPUI5'
     publishLocation: 'pipeline'
