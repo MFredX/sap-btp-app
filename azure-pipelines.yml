@@ -29,10 +29,6 @@ steps:
     echo "##vso[task.setvariable variable=appID;]$(cat mta.yaml | shyaml get-value ID)"
   displayName: 'Defining verison and appID variables'
 
-- task: Bash@3
-  inputs:
-    filePath: '$(System.DefaultWorkingDirectory)/actions.sh'
-
 - script: |
     ls
   displayName: 'List folder directory content pre-build'
