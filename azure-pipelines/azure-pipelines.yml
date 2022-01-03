@@ -55,8 +55,18 @@ stages:
       steps:
         - script: |
             mbt build -p=cf
-            echo SAP App Version: $(appVersion)
-            echo SAP App Name: $(appName)
+          displayName: mbt build
+        - script: |
+            echo SAP App Version: $(version)
+            cd mta_archives
+            ls
+            pwd
+            cd ../
+            pwd
+            echo Pipeline.Workspace is : $(Pipeline.Workspace)
+            echo Artificat Staging dir : $(Build.ArtifactStagingDirectory)
+            echo Build Repo LocalPath :$(Build.Repository.LocalPath)
+          displayName: 'List folder directory content post-build'
 
     - job: PublishArtifact
       steps:
