@@ -35,6 +35,14 @@ stages:
           npm install -g mbt @ui5/cli
         displayName: 'Install Cloud MTA Build Tool (MBT)'
 
+    - job: AppVariableDefinition
+      displayName: App Variable Definition
+      steps:
+       - bash : |
+          pip install shyaml
+          echo "##vso[task.setvariable variable=appVersion;]$(cat mta.yaml | shyaml get-value version)"
+          echo "##vso[task.setvariable variable=appName;]$(cat mta.yaml | shyaml get-value ID)"
+
 - stage: BuildStage
   displayName: Build
   jobs:
@@ -42,12 +50,10 @@ stages:
       displayName: Build MTA
       steps:
         - script: |
-            echo "Success"
+            mbt build -p=cf
+            echo SAP App Version: $(appVersion)
 
-# - bash : |
-#     pip install shyaml
-#     echo "##vso[task.setvariable variable=version;]$(cat mta.yaml | shyaml get-value version)"
-#     echo "##vso[task.setvariable variable=appID;]$(cat mta.yaml | shyaml get-value ID)"
+
 #   displayName: 'Defining verison and appID variables'
 
 # - script: |
