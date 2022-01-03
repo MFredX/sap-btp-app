@@ -1,0 +1,71 @@
+ # Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+variables:
+  - template: global.yaml
+
+pool:
+  vmImage: ubuntu-latest
+
+## Environment Setup
+## -----
+
+stages:
+- stage: EnvSetupStage
+  displayName: Environment Setup stage
+  jobs:
+    - job: EnvironmentSetup
+      displayName: Environment Setup
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x' 
+        displayName: 'Install Node.js'
+
+      - script: |
+          npm install
+        displayName: 'Install dependencies'
+
+      - script: |
+          npm install -g mbt @ui5/cli
+        displayName: 'Install Cloud MTA Build Tool (MBT)'
+
+# - bash : |
+#     pip install shyaml
+#     echo "##vso[task.setvariable variable=version;]$(cat mta.yaml | shyaml get-value version)"
+#     echo "##vso[task.setvariable variable=appID;]$(cat mta.yaml | shyaml get-value ID)"
+#   displayName: 'Defining verison and appID variables'
+
+# - script: |
+#     ls
+#   displayName: 'List folder directory content pre-build'
+
+## Build
+## -----
+
+# - script: |
+#     mbt build -p=cf
+#   displayName: 'Build the MTA'
+
+# - script: |
+#     echo SAP App Version: $(version)
+#     cd mta_archives
+#     ls
+#     pwd
+#     cd ../
+#     pwd
+#     echo Pipeline.Workspace is : $(Pipeline.Workspace)
+#     echo Artificat Staging dir : $(Build.ArtifactStagingDirectory)
+#     echo Build Repo LocalPath :$(Build.Repository.LocalPath)
+#   displayName: 'List folder directory content post-build'
+
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appID)_$(version).mtar' #Default location & name of MTA Archive from Cloud MTA Build 
+#     artifact: 'SAP-BTP-SAPUI5'
+#     publishLocation: 'pipeline'
