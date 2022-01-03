@@ -17,7 +17,7 @@ pool:
 
 stages:
 - stage: EnvSetupStage
-  displayName: Environment Setup stage
+  displayName: Environment Setup
   jobs:
     - job: EnvironmentSetup
       displayName: Environment Setup
@@ -34,6 +34,15 @@ stages:
       - script: |
           npm install -g mbt @ui5/cli
         displayName: 'Install Cloud MTA Build Tool (MBT)'
+
+- stage: BuildStage
+  displayName: Build
+  jobs:
+    - job: BuildJob
+      displayName: Build MTA
+      steps:
+        - script: |
+            echo "Success"
 
 # - bash : |
 #     pip install shyaml
