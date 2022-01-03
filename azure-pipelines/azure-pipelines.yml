@@ -62,7 +62,7 @@ stages:
       steps:
        - task: PublishPipelineArtifact@1
          inputs:
-          targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appID)_$(version).mtar' #Default location & name of MTA Archive from Cloud MTA Build 
+          targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appName)_$(appVersion).mtar' #Default location & name of MTA Archive from Cloud MTA Build 
           artifact: 'SAP-BTP-SAPUI5'
           publishLocation: 'pipeline'
 
