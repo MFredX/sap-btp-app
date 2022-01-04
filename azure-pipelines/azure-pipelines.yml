@@ -12,11 +12,10 @@ variables:
 pool:
   vmImage: ubuntu-latest
 
-## Build
-## -----
-
 stages:
 
+## Build
+## -----
 - stage: Build
   displayName: Build and Publish
   jobs:
@@ -53,6 +52,12 @@ stages:
           artifact: 'SAP-BTP-SAPUI5'
           publishLocation: 'pipeline'
 
+## Deploy
+## -----
+- stage: Deploy
+  displayName: 'Deploy App'
+  dependsOn: Build
+  jobs:
     - job: Deploy
       steps:
         - checkout: none
