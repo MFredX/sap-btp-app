@@ -90,6 +90,7 @@ stages:
           displayName: 'Download Pipeline Artifact'
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
+            targetPath: '$(Pipeline.Workspace)'
 
         - bash: |
             cf --help
