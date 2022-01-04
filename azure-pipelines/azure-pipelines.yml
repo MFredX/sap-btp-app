@@ -69,7 +69,7 @@ stages:
       steps:
         - script: |
             echo "Test 2 Done"
-            
+
     - job: Test3
       displayName: 'Run mock npm audits'
       steps:
@@ -85,10 +85,23 @@ stages:
     - job: Deploy
       steps:
         - checkout: none
+
         - task: DownloadPipelineArtifact@2
           displayName: 'Download Pipeline Artifact'
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
+
+        - bash: 'cf install-plugin multiapps -f'
+          displayName: 'Install Dependency'
+
+        - bash: 'cf login -a $(apiUrl) -u $(devUser) -p $(devPassword) -o $(orgName) -s $(devOrg) '
+          displayName: 'CF Login'
+
+        - bash: |
+            cd _sap-ui5-first/$(appID)
+            cf deploy $(appName)_$(appVersion).mtar
+          displayName: 'CF Deploy'
+
 
 # steps:
 # - task: DownloadPipelineArtifact@2
@@ -105,9 +118,7 @@ stages:
 #   org-name: '922c6e7ctrial'
 #   dev-org: 'dev'
 
-# steps:
-# - bash: 'cf login -a $(api-url) -u $(dev-user) -p $(dev-password) -o $(org-name) -s $(dev-org) '
-#   displayName: 'CF Login'
+
 # steps:
 # - bash: |
 #    cd _sap-ui5-first/$(appID)
