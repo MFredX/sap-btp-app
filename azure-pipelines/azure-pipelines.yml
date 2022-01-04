@@ -84,12 +84,11 @@ stages:
   jobs:
     - job: Deploy
       steps:
-        - checkout: none
+        #- checkout: none
 
         - task: DownloadPipelineArtifact@2
           displayName: 'Download Pipeline Artifact'
           inputs:
-            artifactName: 'SAP-BTP-SAPUI5'
             targetPath: '$(Pipeline.Workspace)'
 
         - bash: |
@@ -108,6 +107,7 @@ stages:
 
         - bash: |
             pwd
+            ls 
             cd _sap-ui5-first
             ls
             cd _sap-ui5-first/SAP-BTP-SAPUI5
