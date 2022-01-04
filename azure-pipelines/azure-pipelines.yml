@@ -89,7 +89,7 @@ stages:
         - task: DownloadPipelineArtifact@2
           displayName: 'Download Pipeline Artifact'
           inputs:
-            targetPath: '$(Pipeline.Workspace)/artifact'
+            targetPath: '$(Pipeline.Workspace)'
 
         - bash: |
             cf --help
@@ -106,12 +106,8 @@ stages:
           displayName: 'CF Login'
 
         - bash: |
-            pwd
-            ls 
-            cd $(Pipeline.Workspace)/artifact
-            ls
-            cd SAP-BTP-SAPUI5
-            cf deploy sap-btp-sapui5_0.0.2.mtar
+            cd $(Pipeline.Workspace)/$(appName)
+            cf deploy $(appName)_$(appVersion).mtar
           displayName: 'CF Deploy' #cf deploy $(appName)_$(appVersion).mtar
 
 
