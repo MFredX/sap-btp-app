@@ -41,7 +41,9 @@ stages:
     - job: BuildJob2
       dependsOn: BuildJob
       steps:
+      - checkout: none
       - script: |
+          npm install -g mbt @ui5/cli
           mbt build -p=cf
         displayName: mbt build
 
@@ -56,7 +58,7 @@ stages:
           echo Artificat Staging dir : $(Build.ArtifactStagingDirectory)
           echo Build Repo LocalPath :$(Build.Repository.LocalPath)
         displayName: 'List folder directory content post-build'
-      
+
       - task: PublishPipelineArtifact@1
         inputs:
           #Default location & name of MTA Archive from Cloud MTA Build
@@ -79,7 +81,7 @@ stages:
           displayName: 'Download Pipeline Artifact'
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
-      dependsOn: BuildJob
+      dependsOn: BuildJob2
       condition: succeeded()
 
 # steps:
