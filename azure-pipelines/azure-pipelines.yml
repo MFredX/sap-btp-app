@@ -49,7 +49,7 @@ stages:
         inputs:
           #Default location & name of MTA Archive from Cloud MTA Build
           targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appName)_$(appVersion).mtar'  
-          artifact: 'SAP-BTP-SAPUI5'
+          artifact: $(appName)
           publishLocation: 'pipeline'
 
 ## Deploy
@@ -104,8 +104,8 @@ stages:
 
         - bash: 'cf login -a $(apiUrl) -u $(devUser) -p $(devPassword) -o $(orgName) -s $(devOrg) '
           displayName: 'CF Login'
-          #Capitalise appName using bash operation
+
         - bash: |
             cd $(Pipeline.Workspace)/$(appName)
             cf deploy $(appName)_$(appVersion).mtar
-          displayName: 'CF Deploy' #cf deploy $(appName)_$(appVersion).mtar
+          displayName: 'CF Deploy'
