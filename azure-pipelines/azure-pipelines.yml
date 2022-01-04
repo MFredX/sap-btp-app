@@ -17,14 +17,18 @@ pool:
 
 stages:
 
-- stage: BuildAndPublish
-  pool: 
-    vmImage: ubuntu-latest
+- stage: Build
   displayName: Build and Publish
   jobs:
-    - job: BuildJob
+    - job: BuildAndPublish
       displayName: Environment Setup & Build
       steps:
+      - bash : |
+          pip install shyaml
+          echo "##vso[task.setvariable variable=appVersion;isoutput=true]$(cat mta.yaml | shyaml get-value version)"
+          echo "##vso[task.setvariable variable=appName;isoutput=true]$(cat mta.yaml | shyaml get-value ID)"
+        displayName: 'Read build time vars'
+
       - task: NodeTool@0
         inputs:
           versionSpec: '10.x' 
@@ -38,30 +42,9 @@ stages:
           npm install -g mbt @ui5/cli
         displayName: 'Install Cloud MTA Build Tool (MBT)'
 
-    - job: BuildJob2
-      dependsOn: BuildJob
-      steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.x' 
-        displayName: 'Install Node.js'
-      - checkout: none
       - script: |
-          npm install -g mbt @ui5/cli
           mbt build -p=cf
-        displayName: mbt build
-
-      - script: |
-          echo SAP App Version: $(version)
-          cd mta_archives
-          ls
-          pwd
-          cd ../
-          pwd
-          echo Pipeline.Workspace is : $(Pipeline.Workspace)
-          echo Artificat Staging dir : $(Build.ArtifactStagingDirectory)
-          echo Build Repo LocalPath :$(Build.Repository.LocalPath)
-        displayName: 'List folder directory content post-build'
+        displayName: 'Run mbt build'
 
       - task: PublishPipelineArtifact@1
         inputs:
@@ -70,14 +53,6 @@ stages:
           artifact: 'SAP-BTP-SAPUI5'
           publishLocation: 'pipeline'
 
-    - job: AppVariableDefinition
-      displayName: App Variable Definition
-      steps:
-       - bash : |
-          pip install shyaml
-          echo "##vso[task.setvariable variable=appVersion;isoutput=true]$(cat mta.yaml | shyaml get-value version)"
-          echo "##vso[task.setvariable variable=appName;isoutput=true]$(cat mta.yaml | shyaml get-value ID)"
-    
     - job: Deploy
       steps:
         - checkout: none
@@ -85,7 +60,7 @@ stages:
           displayName: 'Download Pipeline Artifact'
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
-      dependsOn: BuildJob2
+      dependsOn: BuildJob
       condition: succeeded()
 
 # steps:
