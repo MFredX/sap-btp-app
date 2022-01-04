@@ -41,6 +41,10 @@ stages:
     - job: BuildJob2
       dependsOn: BuildJob
       steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x' 
+        displayName: 'Install Node.js'
       - checkout: none
       - script: |
           npm install -g mbt @ui5/cli
