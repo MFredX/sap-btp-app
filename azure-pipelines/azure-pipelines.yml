@@ -54,9 +54,33 @@ stages:
 
 ## Deploy
 ## -----
+- stage: Test
+  displayName: 'Tests'
+  dependsOn: Build
+  jobs:
+    - job: Test1
+      displayName: 'Run mock tests 1'
+      steps:
+        - script: |
+            echo "Test 1 Done"
+
+    - job: Test2
+      displayName: 'Run mock tests 2'
+      steps:
+        - script: |
+            echo "Test 2 Done"
+            
+    - job: Test3
+      displayName: 'Run mock npm audits'
+      steps:
+        - script: |
+            echo "npm audits done"
+
+## Deploy
+## -----
 - stage: Deploy
   displayName: 'Deploy App'
-  dependsOn: Build
+  dependsOn: Test
   jobs:
     - job: Deploy
       steps:
