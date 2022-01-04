@@ -106,7 +106,7 @@ stages:
           displayName: 'CF Login'
 
         - bash: |
-            cd $(Pipeline.Workspace)/SAP-BTP-SAPUI5
+            cd $(Pipeline.Workspace)/$(appName)^^ 
             cf deploy $(appName)_$(appVersion).mtar
           displayName: 'CF Deploy' #cf deploy $(appName)_$(appVersion).mtar
 
