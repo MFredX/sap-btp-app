@@ -75,7 +75,7 @@ stages:
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
       dependsOn: BuildJob
-      condition: suceeded()
+      condition: succeeded()
 
 # steps:
 # - task: DownloadPipelineArtifact@2
