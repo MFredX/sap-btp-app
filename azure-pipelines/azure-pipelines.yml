@@ -107,12 +107,12 @@ stages:
           displayName: 'CF Login'
 
         - bash: |
-            ls 
+            pwd
             cd _sap-ui5-first
             ls
-            cd _sap-ui5-first/$(appName)
-            cf deploy $(appName)_$(appVersion).mtar
-          displayName: 'CF Deploy'
+            cd _sap-ui5-first/SAP-BTP-SAPUI5
+            cf deploy sap-btp-sapui5_0.0.2.mtar
+          displayName: 'CF Deploy' #cf deploy $(appName)_$(appVersion).mtar
 
 
 # steps:
