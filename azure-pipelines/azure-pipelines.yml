@@ -104,34 +104,8 @@ stages:
 
         - bash: 'cf login -a $(apiUrl) -u $(devUser) -p $(devPassword) -o $(orgName) -s $(devOrg) '
           displayName: 'CF Login'
-
+          #Capitalise appName using bash operation
         - bash: |
-            cd $(Pipeline.Workspace)/$(appName)^^ 
+            cd $(Pipeline.Workspace)/$(appName)
             cf deploy $(appName)_$(appVersion).mtar
           displayName: 'CF Deploy' #cf deploy $(appName)_$(appVersion).mtar
-
-
-# steps:
-# - task: DownloadPipelineArtifact@2
-#   displayName: 'Download Pipeline Artifact'
-#   inputs:
-#     artifactName: '$(appID)'
-# steps:
-# - bash: 'cf install-plugin multiapps -f'
-#   displayName: 'Install Dependency'
-#Your build pipeline references a secret variable named ‘dev-user’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it secret. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references a secret variable named ‘dev-password’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it secret. See https://go.microsoft.com/fwlink/?linkid=865972
-# variables:
-#   api-url: 'https://api.cf.ap21.hana.ondemand.com'
-#   org-name: '922c6e7ctrial'
-#   dev-org: 'dev'
-
-
-# steps:
-# - bash: |
-#    cd _sap-ui5-first/$(appID)
-   
-#    cf deploy $(appID)_$(version).mtar
-#   displayName: 'CF Deploy'
-
-
