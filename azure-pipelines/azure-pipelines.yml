@@ -39,6 +39,7 @@ stages:
         displayName: 'Install Cloud MTA Build Tool (MBT)'
 
     - job: BuildJob2
+      dependsOn: BuildJob
       steps:
       - script: |
           mbt build -p=cf
@@ -62,9 +63,6 @@ stages:
           targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appName)_$(appVersion).mtar'  
           artifact: 'SAP-BTP-SAPUI5'
           publishLocation: 'pipeline'
-
-      dependsOn: BuildJob
-      condition: succeeded()
 
     - job: AppVariableDefinition
       displayName: App Variable Definition
