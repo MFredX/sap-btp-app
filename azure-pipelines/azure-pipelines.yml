@@ -91,6 +91,13 @@ stages:
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
 
+        - bash: |
+            wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key 
+            sudo apt-key add -
+            echo "deb https://packages.cloudfoundry.org/debian stable main" 
+            sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list'
+          displayName: 'Install the cf CLI'
+
         - bash: 'cf install-plugin multiapps -f'
           displayName: 'Install Dependency'
 
