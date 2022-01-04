@@ -36,6 +36,8 @@ stages:
           npm install -g mbt @ui5/cli
         displayName: 'Install Cloud MTA Build Tool (MBT)'
 
+    - job: BuildJob2
+      steps:
       - script: |
           mbt build -p=cf
         displayName: mbt build
@@ -58,6 +60,9 @@ stages:
           targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appName)_$(appVersion).mtar'  
           artifact: 'SAP-BTP-SAPUI5'
           publishLocation: 'pipeline'
+          
+      dependsOn: BuildJob
+      condition: succeeded()
 
     - job: AppVariableDefinition
       displayName: App Variable Definition
