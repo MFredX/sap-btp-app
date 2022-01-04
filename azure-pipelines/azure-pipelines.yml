@@ -60,7 +60,7 @@ stages:
           displayName: 'Download Pipeline Artifact'
           inputs:
             artifactName: 'SAP-BTP-SAPUI5'
-      dependsOn: BuildJob
+      dependsOn: BuildAndPublish
       condition: succeeded()
 
 # steps:
