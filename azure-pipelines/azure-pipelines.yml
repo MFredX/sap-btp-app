@@ -108,7 +108,7 @@ stages:
         - bash: |
             pwd
             ls 
-            cd artifact
+            cd $(Pipeline.Workspace)/artifact
             ls
             cd SAP-BTP-SAPUI5
             cf deploy sap-btp-sapui5_0.0.2.mtar
