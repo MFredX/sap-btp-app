@@ -106,6 +106,9 @@ stages:
           displayName: 'CF Login'
 
         - bash: |
+            ls 
+            cd _sap-ui5-first
+            ls
             cd _sap-ui5-first/$(appName)
             cf deploy $(appName)_$(appVersion).mtar
           displayName: 'CF Deploy'
