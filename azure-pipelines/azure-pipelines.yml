@@ -18,6 +18,8 @@ pool:
 stages:
 
 - stage: BuildAndPublish
+  pool: 
+    vmImage: ubuntu-latest
   displayName: Build and Publish
   jobs:
     - job: BuildJob
@@ -60,7 +62,7 @@ stages:
           targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appName)_$(appVersion).mtar'  
           artifact: 'SAP-BTP-SAPUI5'
           publishLocation: 'pipeline'
-          
+
       dependsOn: BuildJob
       condition: succeeded()
 
