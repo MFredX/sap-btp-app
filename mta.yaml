@@ -1,7 +1,7 @@
 _schema-version: "3.2"
 ID: sap-btp-sapui5
 description: A Fiori application.
-version: 0.0.2
+version: 0.0.1
 modules:
 - name: sap-btp-sapui5-dest-content
   type: com.sap.application.content
