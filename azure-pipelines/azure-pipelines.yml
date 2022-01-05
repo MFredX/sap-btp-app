@@ -1,13 +1,13 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+# SAP MTA Application 
+# Builds and deploys an SAP HTML5 Application as an MTA
 
 trigger:
-- master
+#- master
+#- dev
 
 variables:
-  - template: global.yaml
+  appVersion: 0.0.3
+  mtaID: sap-btp-sapui52
 
 pool:
   vmImage: ubuntu-latest
@@ -17,7 +17,7 @@ stages:
 ## Build
 ## -----
 - stage: Build
-  displayName: Build and Publish
+  displayName: Dev-Build and Publish
   jobs:
     - job: BuildAndPublish
       displayName: Environment Setup & Build
@@ -25,7 +25,7 @@ stages:
       - bash : |
           pip install shyaml
           echo "##vso[task.setvariable variable=appVersion;isoutput=true]$(cat mta.yaml | shyaml get-value version)"
-          echo "##vso[task.setvariable variable=appName;isoutput=true]$(cat mta.yaml | shyaml get-value ID)"
+          echo "##vso[task.setvariable variable=mtaID;isoutput=true]$(cat mta.yaml | shyaml get-value ID)"
         displayName: 'Read build time vars'
 
       - task: NodeTool@0
@@ -48,69 +48,69 @@ stages:
       - task: PublishPipelineArtifact@1
         inputs:
           #Default location & name of MTA Archive from Cloud MTA Build
-          targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(appName)_$(appVersion).mtar'  
-          artifact: $(appName)
+          targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(mtaID)_$(appVersion).mtar'  
+          artifact: $(mtaID)
           publishLocation: 'pipeline'
 
-## Test
-## -----
-- stage: Test
-  displayName: 'Tests'
-  dependsOn: Build
-  jobs:
-    - job: Test1
-      displayName: 'Run mock tests 1'
-      steps:
-        - script: |
-            echo "Test 1 Done"
+# ## Test
+# ## -----
+# - stage: Test
+#   displayName: 'Tests'
+#   dependsOn: Build
+#   jobs:
+#     - job: Test1
+#       displayName: 'Run mock tests 1'
+#       steps:
+#         - script: |
+#             echo "Test 1 Done"
 
-    - job: Test2
-      displayName: 'Run mock tests 2'
-      steps:
-        - script: |
-            echo "Test 2 Done"
+#     - job: Test2
+#       displayName: 'Run mock tests 2'
+#       steps:
+#         - script: |
+#             echo "Test 2 Done"
 
-    - job: Test3
-      displayName: 'Run mock npm audits'
-      steps:
-        - script: |
-            echo "npm audits done"
+#     - job: Test3
+#       displayName: 'Run mock npm audits'
+#       steps:
+#         - script: |
+#             echo "npm audits done"
 
-## Deploy
-## -----
-- stage: Deploy
-  displayName: 'Deploy App'
-  dependsOn: Test
-  jobs:
-    - deployment: DeployApp
-      displayName: 'Deploy App'
-      environment: 'prod'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - checkout: none
+# ## Deploy
+# ## -----
+# - stage: Deploy
+#   displayName: 'Deploy App'
+#   dependsOn: Test
+#   jobs:
+#     - deployment: DeployApp
+#       displayName: 'Deploy App'
+#       environment: 'prod'
+#       strategy:
+#         runOnce:
+#           deploy:
+#             steps:
+#             - checkout: none
 
-            - task: DownloadPipelineArtifact@2
-              displayName: 'Download Pipeline Artifact'
-              inputs:
-                targetPath: '$(Pipeline.Workspace)'
+#             - task: DownloadPipelineArtifact@2
+#               displayName: 'Download Pipeline Artifact'
+#               inputs:
+#                 targetPath: '$(Pipeline.Workspace)'
 
-            - bash: |
-                cf --help
-                wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-                echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-                sudo apt-get update
-                sudo apt-get install cf-cli
-              displayName: 'Install the cf CLI'
+#             - bash: |
+#                 cf --help
+#                 wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+#                 echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+#                 sudo apt-get update
+#                 sudo apt-get install cf-cli
+#               displayName: 'Install the cf CLI'
 
-            - bash: 'cf install-plugin multiapps -f'
-              displayName: 'Install Dependency'
+#             - bash: 'cf install-plugin multiapps -f'
+#               displayName: 'Install Dependency'
 
-            - bash: 'cf login -a $(apiUrl) -u $(devUser) -p $(devPassword) -o $(orgName) -s $(devOrg) '
-              displayName: 'CF Login'
+#             - bash: 'cf login -a $(apiUrl) -u $(devUser) -p $(devPassword) -o $(orgName) -s $(devOrg) '
+#               displayName: 'CF Login'
 
-            - bash: |
-                cd $(Pipeline.Workspace)/$(appName)
-                cf deploy $(appName)_$(appVersion).mtar
-              displayName: 'CF Deploy'
+#             - bash: |
+#                 cd $(Pipeline.Workspace)/$(mtaID)
+#                 cf deploy $(mtaID)_$(appVersion).mtar
+#               displayName: 'CF Deploy'

@@ -1,6 +1,0 @@
-variables:
-
-# To be overwritten as the pipeline is run
-# These variables are extracted from the mta.yaml file
-  appVersion: 0.0.3
-  appName: sap-btp-sapui52

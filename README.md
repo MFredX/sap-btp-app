@@ -8,9 +8,17 @@ This repository demonstrates a simple CI/CD pipeline for a UI5 app that is deplo
 
 - New builds and deployments will be triggered when new code is pushed to the master branch.
 
-### Build Process
+- An AzureDevOps YAML pipeline was used
 
-The `azure-pipelines.yml` outlines the steps of the build process.
+### Build and Deploy Process
+
+The `azure-pipelines/azure-pipelines.yml` outlines the steps of the build and deploy process.
+
+There are three stages currently in this pipeline;
+
+1.  Build
+2.  Test (Mock tests used)
+3.  Deploy
 
 ### Release Process
 
@@ -19,25 +27,6 @@ The `azure-pipelines.yml` outlines the steps of the build process.
 - **Agent pool** - Azure Pipelines
 
 - **Agent Specification** - vs2017-win2016
-
-#### Release Tasks
-
-1. Downloaded Build Pipeline Artifact
-2. Install Dependencies
-
-   `cf install-plugin multiapps -f`
-
-3. Cloud Foundry Login. Crednetials have to be added in the Task Variables section.
-
-   `cf login -a $(api-url) -u $(dev-user) -p $(dev-password) -o $(org-name) -s $(dev-org)`
-
-4. Cloud Foundry Deploy.
-
-   Note - In my case I have to change directories to ensure I am in the correct location where the MTAR archive is present.
-
-   `cd _sap-ui5-first/SAP-BTP-SAPUI5`
-
-   `cf deploy sap-btp-sapui5_0.0.1.mtar`
 
 ## Other Helpful Resources
 
