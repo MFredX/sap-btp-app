@@ -20,14 +20,6 @@ There are three stages currently in this pipeline;
 2.  Test (Mock tests used)
 3.  Deploy
 
-### Release Process
-
-#### Configuration
-
-- **Agent pool** - Azure Pipelines
-
-- **Agent Specification** - vs2017-win2016
-
 ## Other Helpful Resources
 
 [Build a CI/CD Pipeline in Azure DevOps and connect it to SAP Cloud Foundry](https://blogs.sap.com/2021/01/25/build-a-ci-cd-pipeline-in-azure-devops-and-connect-it-to-sap-cloud-foundry/)
