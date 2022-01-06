@@ -1,5 +1,5 @@
 _schema-version: "3.2"
-ID: test-sap-btp-sapui5
+ID: test-sap-btp-sapui52
 description: A Fiori application.
 version: 0.0.1
 modules:
