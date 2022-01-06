@@ -2,10 +2,9 @@
 # Builds and deploys an SAP HTML5 Application as an MTA
 
 trigger:
+- master
 - test
-
-#- master
-#- dev
+- dev
 
 
 variables:
