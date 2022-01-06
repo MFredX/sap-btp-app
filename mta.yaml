@@ -1,53 +1,53 @@
 _schema-version: "3.2"
-ID: test-sap-btp-sapui52111
+ID: dev-sap-btp-sapui5
 description: A Fiori application.
 version: 0.0.1
 modules:
-- name: test-test-sap-btp-sapui5-dest-content
+- name: dev-sap-btp-sapui5-dest-content
   type: com.sap.application.content
   requires:
-  - name: test-sap-btp-sapui5-dest-srv
+  - name: dev-sap-btp-sapui5-dest-srv
     parameters:
       content-target: true
-  - name: test-sap-btp-sapui5-repo-host
+  - name: dev-sap-btp-sapui5-repo-host
     parameters:
       service-key:
-        name: test-sap-btp-sapui5-repo-host-key
-  - name: test-sap-btp-sapui5-uaa
+        name: dev-sap-btp-sapui5-repo-host-key
+  - name: dev-sap-btp-sapui5-uaa
     parameters:
       service-key:
-        name: test-sap-btp-sapui5-uaa-key
+        name: dev-sap-btp-sapui5-uaa-key
   parameters:
     content:
       instance:
         destinations:
-        - Name: test-sap-btp-sapui5_repo_host
-          ServiceInstanceName: test-sap-btp-sapui5-html5-srv
-          ServiceKeyName: test-sap-btp-sapui5-repo-host-key
-          sap.cloud.service: test-sap-btp-sapui5
+        - Name: dev-sap-btp-sapui5_repo_host
+          ServiceInstanceName: dev-sap-btp-sapui5-html5-srv
+          ServiceKeyName: dev-sap-btp-sapui5-repo-host-key
+          sap.cloud.service: dev-sap-btp-sapui5
         - Authentication: OAuth2UserTokenExchange
-          Name: test-sap-btp-sapui5_uaa
-          ServiceInstanceName: test-sap-btp-sapui5-xsuaa-srv
-          ServiceKeyName: test-sap-btp-sapui5-uaa-key
-          sap.cloud.service: test-sap-btp-sapui5
+          Name: dev-sap-btp-sapui5_uaa
+          ServiceInstanceName: dev-sap-btp-sapui5-xsuaa-srv
+          ServiceKeyName: dev-sap-btp-sapui5-uaa-key
+          sap.cloud.service: dev-sap-btp-sapui5
         existing_destinations_policy: ignore
   build-parameters:
     no-source: true
-- name: test-sap-btp-sapui5-app-content
+- name: dev-sap-btp-sapui5-app-content
   type: com.sap.application.content
   path: .
   requires:
-  - name: test-sap-btp-sapui5-repo-host
+  - name: dev-sap-btp-sapui5-repo-host
     parameters:
       content-target: true
   build-parameters:
     build-result: resources
     requires:
     - artifacts:
-      - testsapbtpsapui5.zip
-      name: testsapbtpsapui5
+      - sapbtpsapui5.zip
+      name: sapbtpsapui5
       target-path: resources/
-- name: testsapbtpsapui5
+- name: sapbtpsapui5
   type: html5
   path: .
   build-parameters:
@@ -58,7 +58,7 @@ modules:
     - npm run build:cf
     supported-platforms: []
 resources:
-- name: test-sap-btp-sapui5-dest-srv
+- name: dev-sap-btp-sapui5-dest-srv
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -74,20 +74,20 @@ resources:
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
-    service-name: test-sap-btp-sapui5-dest-srv
+    service-name: dev-sap-btp-sapui5-dest-srv
     service-plan: lite
-- name: test-sap-btp-sapui5-uaa
+- name: dev-sap-btp-sapui5-uaa
   type: org.cloudfoundry.managed-service
   parameters:
     path: ./xs-security.json
     service: xsuaa
-    service-name: test-sap-btp-sapui5-xsuaa-srv
+    service-name: dev-sap-btp-sapui5-xsuaa-srv
     service-plan: application
-- name: test-sap-btp-sapui5-repo-host
+- name: dev-sap-btp-sapui5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: test-sap-btp-sapui5-html5-srv
+    service-name: dev-sap-btp-sapui5-html5-srv
     service-plan: app-host
 parameters:
   deploy_mode: html5-repo

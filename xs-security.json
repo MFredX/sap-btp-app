@@ -1,5 +1,5 @@
 {
-  "xsappname": "testsapbtpsapui5",
+  "xsappname": "devsapbtpsapui5",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
   "scopes": [
