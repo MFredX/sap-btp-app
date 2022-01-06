@@ -9,7 +9,7 @@ trigger:
 
 variables:
   appVersion: 0.0.1
-  mtaID: dev-sap-btp-sapui5
+  mtaID: dev-sap-btp-sapui5 #TODO : Pick these vars up dynamically
 
 pool:
   vmImage: ubuntu-latest
