@@ -1,5 +1,5 @@
 {
-  "xsappname": "sapbtpsapui5",
+  "xsappname": "testsapbtpsapui5",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
   "scopes": [
@@ -12,9 +12,7 @@
     {
       "name": "Token_Exchange",
       "description": "UAA",
-      "scope-references": [
-        "uaa.user"
-      ]
+      "scope-references": ["uaa.user"]
     }
   ]
 }
