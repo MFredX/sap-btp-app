@@ -10,7 +10,7 @@ trigger:
 
 variables:
   appVersion: 0.0.1
-  mtaID: test-sap-btp-sapui521
+  mtaID: test-sap-btp-sapui5211
 
 pool:
   vmImage: ubuntu-latest
