@@ -47,7 +47,7 @@ modules:
       - devsapbtpsapui5.zip
       name: devsapbtpsapui5
       target-path: resources/
-- name: sapbtpsapui5
+- name: devsapbtpsapui5
   type: html5
   path: .
   build-parameters:
