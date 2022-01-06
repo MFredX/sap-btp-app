@@ -1,5 +1,5 @@
 _schema-version: "3.2"
-ID: test-sap-btp-sapui5211
+ID: test-sap-btp-sapui52111
 description: A Fiori application.
 version: 0.0.1
 modules:
@@ -44,10 +44,10 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - sapbtpsapui5.zip
-      name: sapbtpsapui5
+      - testsapbtpsapui5.zip
+      name: testsapbtpsapui5
       target-path: resources/
-- name: sapbtpsapui5
+- name: testsapbtpsapui5
   type: html5
   path: .
   build-parameters:
