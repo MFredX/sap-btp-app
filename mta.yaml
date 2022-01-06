@@ -44,8 +44,8 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - sapbtpsapui5.zip
-      name: sapbtpsapui5
+      - devsapbtpsapui5.zip
+      name: devsapbtpsapui5
       target-path: resources/
 - name: sapbtpsapui5
   type: html5
