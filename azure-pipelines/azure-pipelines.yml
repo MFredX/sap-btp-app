@@ -7,8 +7,8 @@ trigger:
 - test
 
 variables:
-  appVersion: 0.0.3
-  mtaID: sap-btp-sapui52
+  appVersion: 0.0.1
+  mtaID: test-sap-btp-sapui5
 
 pool:
   vmImage: ubuntu-latest
@@ -85,7 +85,7 @@ stages:
   jobs:
     - deployment: DeployApp
       displayName: 'Deploy App'
-      environment: 'prod'
+      environment: 'test'
       strategy:
         runOnce:
           deploy:
