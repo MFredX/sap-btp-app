@@ -7,9 +7,11 @@ trigger:
 - dev
 
 
-variables:
-  appVersion: 0.0.1
-  mtaID: dev-sap-btp-sapui511 #TODO : Pick these vars up dynamically
+#variables:
+  #appVersion: 0.0.1
+  #mtaID: dev-sap-btp-sapui511 #TODO : Pick these vars up dynamically
+  #appVersion: temp
+  #mtaID: temp
 
 pool:
   vmImage: ubuntu-latest
