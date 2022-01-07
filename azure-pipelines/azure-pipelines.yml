@@ -27,7 +27,7 @@ stages:
       - bash: |
           #!/bin/sh
           echo $(Build.SourceBranchName)
-          branchSource = $(echo "$(System.Build.SourceBranchName)")
+          branchSource = $(Build.SourceBranchName)
           echo $branchSource
           branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
           if [ $branch == "dev" ]
