@@ -34,9 +34,15 @@ stages:
 
       - bash : |
           pip install shyaml
-          echo "##vso[task.setvariable variable=appVersion;isoutput=true]$(cat mta.yaml | shyaml get-value version)"
-          echo "##vso[task.setvariable variable=mtaID;isoutput=true]$(cat mta.yaml | shyaml get-value ID)"
+          echo "##vso[task.setvariable variable=appVersion]$(cat mta.yaml | shyaml get-value version)"
+          echo "##vso[task.setvariable variable=mtaID]$(cat mta.yaml | shyaml get-value ID)"
         displayName: 'Read build time vars'
+
+      - bash : |
+          pip install shyaml
+          echo appverion is $(appVersion)
+          echo mtaID is $(mtaID)
+        displayName: 'Print set vars on screen'
 
       - task: NodeTool@0
         inputs:
