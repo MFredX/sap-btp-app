@@ -1,5 +1,5 @@
 #!/bin/sh
-BRANCH=$Build.SourceBranchName
+BRANCH=$BUILD_SOURCEBRANCHNAME
 echo $BRANCH
 if [ $BRANCH = "dev" ]
 then
