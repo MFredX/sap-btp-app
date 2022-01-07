@@ -16,12 +16,16 @@ then
     cp env-properties/dev/dev-manifest.json webapp/manifest.json
     echo "Environment setup complete..."
 
+    exit 0
 elif [ $BRANCH = "test" ]
 then
     echo "Configuring test environment"
+    exit 0
 elif [ $BRANCH = "master" ]
 then
     echo "Configuring prod environment"
+    exit 0
 else
     echo "No suitable env found"
+    exit 1
 fi
