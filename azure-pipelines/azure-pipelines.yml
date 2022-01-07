@@ -26,7 +26,8 @@ stages:
       steps:
       - bash: |
           #!/bin/sh
-          branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+          branch=${Build.SourceBranchName}
+          echo $branch
           if [ $(Build.SourceBranchName) = "dev" ]
           then
               echo "Configuring dev environment"
