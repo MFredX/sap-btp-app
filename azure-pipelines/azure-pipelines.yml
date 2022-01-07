@@ -26,8 +26,9 @@ stages:
       steps:
       - bash: |
           #!/bin/sh
-          branch=${Build.SourceBranchName}
+          branch=$(Build.SourceBranchName)
           echo $branch
+          echo "-----"
           if [ $(Build.SourceBranchName) = "dev" ]
           then
               echo "Configuring dev environment"
