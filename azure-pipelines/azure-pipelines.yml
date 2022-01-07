@@ -26,16 +26,14 @@ stages:
       steps:
       - bash: |
           #!/bin/sh
-          branch=$(Build.SourceBranchName)
-          echo $branch
-          echo "-----"
-          if [ $(Build.SourceBranchName) = "dev" ]
+          BRANCH=$(Build.SourceBranchName)
+          if [ $BRANCH = "dev" ]
           then
               echo "Configuring dev environment"
-          elif [ $branch = "test" ]
+          elif [ $BRANCH = "test" ]
           then
               echo "Configuring test environment"
-          elif [ $branch = "master" ]
+          elif [ $BRANCH = "master" ]
           then
               echo "Configuring prod environment"
           else
