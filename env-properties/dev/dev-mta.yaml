@@ -1,5 +1,5 @@
 _schema-version: "3.2"
-ID: dev-sap-btp-sapui51
+ID: dev-sap-btp-sapui511
 description: A Fiori application.
 version: 0.0.1
 modules:
@@ -44,8 +44,8 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - sapbtpsapui5.zip
-      name: sapbtpsapui5
+      - devsapbtpsapui5.zip
+      name: devsapbtpsapui5
       target-path: resources/
 - name: sapbtpsapui5
   type: html5
