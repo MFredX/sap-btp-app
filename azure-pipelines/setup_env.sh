@@ -1,5 +1,6 @@
 #!/bin/sh
-BRANCH=$(Build.SourceBranchName)
+BRANCH=$Build.SourceBranchName
+echo $BRANCH
 if [ $BRANCH = "dev" ]
 then
     echo "Configuring dev environment"
