@@ -45,8 +45,8 @@ stages:
 
       - bash : |
           pip install shyaml
-          echo appverion is $(appVersion)
-          echo mtaID is $(mtaID)
+          echo appverion is $(outputAppVersion.appVersion)
+          echo mtaID is $(outputAppVersion.mtaID)
         displayName: 'Print set vars on screen'
 
       - task: NodeTool@0
@@ -69,8 +69,8 @@ stages:
       - task: PublishPipelineArtifact@1
         inputs:
           #Default location & name of MTA Archive from Cloud MTA Build
-          targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(mtaID)_$(appVersion).mtar'  
-          artifact: $(mtaID)
+          targetPath: '$(Build.Repository.LocalPath)/mta_archives/$(outputAppVersion.mtaID)_$(outputAppVersion.appVersion).mtar'  
+          artifact: $(outputAppVersion.mtaID)
           publishLocation: 'pipeline'
 
 ## Test
