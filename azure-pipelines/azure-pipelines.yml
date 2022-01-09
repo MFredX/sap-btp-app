@@ -101,7 +101,9 @@ stages:
 ## -----
 - stage: Deploy
   displayName: 'Deploy App'
-  dependsOn: Test
+  dependsOn:
+  - Build 
+  - Test
   jobs:
     - job: PrintVars
       displayName: 'Print vars on to screen'
