@@ -85,17 +85,17 @@ stages:
         - script: |
             echo "Test 1 Done"
 
-    - job: Test2
-      displayName: 'Run mock tests 2'
-      steps:
-        - script: |
-            echo "Test 2 Done"
+    # - job: Test2
+    #   displayName: 'Run mock tests 2'
+    #   steps:
+    #     - script: |
+    #         echo "Test 2 Done"
 
-    - job: Test3
-      displayName: 'Run mock npm audits'
-      steps:
-        - script: |
-            echo "npm audits done"
+    # - job: Test3
+    #   displayName: 'Run mock npm audits'
+    #   steps:
+    #     - script: |
+    #         echo "npm audits done"
 
 ## Deploy
 ## -----
@@ -106,11 +106,11 @@ stages:
     - job: PrintVars
       displayName: 'Print vars on to screen'
       variables:
-        BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID'] ]
-        BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion'] ]
+        BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID']]
+        BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion']]
       steps:
         - script: |
-            echo  $(BuildAndPublishMtaID)
+            echo $(BuildAndPublishMtaID)
             echo $(BuildAndPublishAppVersion)
   
     - deployment: DeployApp
