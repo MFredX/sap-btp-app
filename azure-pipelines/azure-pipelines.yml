@@ -103,6 +103,16 @@ stages:
   displayName: 'Deploy App'
   dependsOn: Test
   jobs:
+    - job: PrintVars
+      displayName: 'Print vars on to screen'
+      variables:
+        BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID'] ]
+        BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion'] ]
+      steps:
+        - script: |
+            echo  $(BuildAndPublishMtaID)
+            echo $(BuildAndPublishAppVersion)
+  
     - deployment: DeployApp
       displayName: 'Deploy App'
       variables:
