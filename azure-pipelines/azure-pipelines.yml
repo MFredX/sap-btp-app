@@ -106,8 +106,8 @@ stages:
     - deployment: DeployApp
       displayName: 'Deploy App'
       variables:
-        BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID']]
-        BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion']]
+        BuildAndPublishMtaID: $[dependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID']]
+        BuildAndPublishAppVersion: $[dependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion']]
 
       environment: 'test'
       strategy:
