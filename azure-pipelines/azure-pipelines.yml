@@ -6,13 +6,6 @@ trigger:
 - test
 - dev
 
-
-#variables:
-  #appVersion: 0.0.1
-  #mtaID: dev-sap-btp-sapui511 #TODO : Pick these vars up dynamically
-  #appVersion: temp
-  #mtaID: temp
-
 pool:
   vmImage: ubuntu-latest
 
@@ -32,10 +25,9 @@ stages:
           scriptPath: './azure-pipelines/setup_env.sh'
         displayName: 'Configure App environment variables'
 
-        #This bash step defines appVersion and mtaID variables by parsing the mta.yaml file
-      - bash : pip install shyaml
-
+        # This bash step defines appVersion and mtaID variables by parsing the mta.yaml file
       - bash :  |
+          pip install shyaml
           echo "##vso[task.setvariable variable=appVersion;isOutput=true]$(cat mta.yaml | shyaml get-value version)"         
           echo "##vso[task.setvariable variable=mtaID;isOutput=true]$(cat mta.yaml | shyaml get-value ID)"
         name: appVars
@@ -44,12 +36,6 @@ stages:
       # - bash :  echo "##vso[task.setvariable variable=mtaID;isOutput=true]$(cat mta.yaml | shyaml get-value ID)"
       #   name: outputMtaID
       #   displayName: 'Read build time vars II'
-
-      - bash : |
-          pip install shyaml
-          echo appverion is $(appVars.appVersion)
-          echo mtaID is $(appVars.mtaID)
-        displayName: 'Print set vars on screen'
 
       - task: NodeTool@0
         inputs:
