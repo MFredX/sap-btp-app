@@ -32,11 +32,16 @@ stages:
           scriptPath: './azure-pipelines/setup_env.sh'
         displayName: 'Configure App environment variables'
 
-      - bash : |
-          pip install shyaml
-          echo "##vso[task.setvariable variable=appVersion]$(cat mta.yaml | shyaml get-value version)"
-          echo "##vso[task.setvariable variable=mtaID]$(cat mta.yaml | shyaml get-value ID)"
+        #This bash step defines appVersion and mtaID variables by parsing the mta.yaml file
+      - bash : pip install shyaml
+
+      - bash : echo "##vso[task.setvariable variable=appVersion,isOutput=true]$(cat mta.yaml | shyaml get-value version)"         
+        name: outputAppVersion
         displayName: 'Read build time vars'
+        
+      - bash :  echo "##vso[task.setvariable variable=mtaID,isOutput=true]$(cat mta.yaml | shyaml get-value ID)"
+        name: outputMtaID
+        displayName: 'Read build time vars II'
 
       - bash : |
           pip install shyaml
@@ -100,6 +105,10 @@ stages:
   jobs:
     - deployment: DeployApp
       displayName: 'Deploy App'
+      variables:
+        BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID']]
+        BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.appVersion']]
+
       environment: 'test'
       strategy:
         runOnce:
@@ -127,6 +136,6 @@ stages:
               displayName: 'CF Login'
 
             - bash: |
-                cd $(Pipeline.Workspace)/$(mtaID)
-                cf deploy $(mtaID)_$(appVersion).mtar
+                cd $(Pipeline.Workspace)/$(BuildAndPublishMtaID)
+                cf deploy $(BuildAndPublishMtaID)_$(BuildAndPublishAppVersion).mtar
               displayName: 'CF Deploy'
