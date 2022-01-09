@@ -106,8 +106,8 @@ stages:
     - deployment: DeployApp
       displayName: 'Deploy App'
       variables:
-        BuildAndPublishMtaID: $[dependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID']]
-        BuildAndPublishAppVersion: $[dependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion']]
+        BuildAndPublishMtaID: $[ dependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID'] ]
+        BuildAndPublishAppVersion: $[ dependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion'] ]
 
       environment: 'test'
       strategy:
@@ -134,6 +134,11 @@ stages:
 
             - bash: 'cf login -a $(apiUrl) -u $(devUser) -p $(devPassword) -o $(orgName) -s $(devOrg) '
               displayName: 'CF Login'
+            
+            - bash: |
+                echo  $(BuildAndPublishMtaID)
+                echo $(BuildAndPublishAppVersion)
+              displayName: 'Display vars'
 
             - bash: |
                 cd $(Pipeline.Workspace)/$(BuildAndPublishMtaID)
