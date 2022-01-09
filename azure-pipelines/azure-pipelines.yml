@@ -102,13 +102,13 @@ stages:
 - stage: Deploy
   displayName: 'Deploy App'
   dependsOn: Test
+  variables:
+    BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID'] ]
+    BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion'] ]
+
   jobs:
     - deployment: DeployApp
       displayName: 'Deploy App'
-      variables:
-        BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['outputMtaID.mtaID'] ]
-        BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['outputAppVersion.appVersion'] ]
-
       environment: 'test'
       strategy:
         runOnce:
