@@ -95,7 +95,7 @@ stages:
       variables:
         BuildAndPublishMtaID: $[stageDependencies.Build.BuildAndPublish.outputs['appVars.mtaID'] ]
         BuildAndPublishAppVersion: $[stageDependencies.Build.BuildAndPublish.outputs['appVars.appVersion'] ]
-      environment: 'test'
+      environment: $(Build.SourceBranchName)
       strategy:
         runOnce:
           deploy:
